@@ -1,13 +1,13 @@
 @extends('admin.admin-app')
 @section('content')
 
-<!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains Supplier content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- Content Header (Supplier header) -->
     <section class="content-header">
       <h1>
-        Page Panel
-        <small>- Add Page</small>
+        Supplier Panel
+        <small>- Add Supplier</small>
       </h1>
     </section>
 
@@ -17,13 +17,15 @@
         <div class="col-md-12">
           <!-- general form elements -->
 
-              <h1 class="box-title">Page Details</h1>
+              <h1 class="box-title">Supplier Details</h1>
 
             <!-- /.box-header -->
             <!-- form start -->
-            <h3>{{$page->heading}}</h3>
+            <h3>{{$supplier->name}}</h3>
               <br>
-            {{$page->content}}
+            {{$supplier->contact_number}}
+              <br>
+            {{$supplier->address}}
 
 
           <!-- /.box -->

@@ -1,11 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SupplierController extends Controller
 {
+    protected $supplier;
+
+    public function __construct(){
+        $this->supplier = new Supplier();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +19,9 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        $data['suppliers'] = $this->supplier->getAllSuppliers();
+
+        return view('admin.supplier.index')->with($data);
     }
 
     /**
@@ -23,7 +31,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.supplier.create');
     }
 
     /**
@@ -34,7 +42,23 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            //Creating new Supplier
+            $supplier = $this->supplier;
+            $supplier->added_by = Auth::user()->id;
+            $supplier->name = $request->input('name');
+            $supplier->contact_number = $request->input('contact_number');
+            $supplier->address = $request->input('address');
+            if($supplier->save()){
+                $this->set_session('Supplier Successfully Added.', true);
+            }else{
+                $this->set_session('Supplier couldnot be added.', false);
+            }
+            return redirect()->route('suppliers.create');
+        }catch(\Exception $e){
+            $this->set_session('Supplier Couldnot be Added.'.$e->getMessage(), false);
+            return redirect()->route('suppliers.create');
+        }
     }
 
     /**
@@ -45,7 +69,8 @@ class SupplierController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['supplier'] = $this->supplier->getSingleSupplier($id);
+        return view('admin.supplier.show')->with($data);
     }
 
     /**
@@ -56,7 +81,8 @@ class SupplierController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['supplier'] = $this->supplier->getSingleSupplier($id);
+        return view('admin.supplier.edit')->with($data);
     }
 
     /**
@@ -68,7 +94,23 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            //Updating Supplier
+            $supplier = Supplier::find($id);
+            $supplier->added_by = Auth::user()->id;
+            $supplier->name = $request->input('name');
+            $supplier->contact_number = $request->input('contact_number');
+            $supplier->address = $request->input('address');
+            if($supplier->save()){
+                $this->set_session('Supplier Successfully Edited.', true);
+            }else{
+                $this->set_session('Supplier couldnot be edited.', false);
+            }
+            return redirect()->route('suppliers.edit', ['id'=> $id]);
+        }catch(\Exception $e){
+            $this->set_session('Supplier Couldnot be Edited.'.$e->getMessage(), false);
+            return redirect()->route('suppliers.edit', ['id'=> $id]);
+        }
     }
 
     /**
