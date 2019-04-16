@@ -38,6 +38,10 @@
                   <label for="exampleInputEmail1">Supplier Address</label>
                   <input type="text" class="form-control" name="address" id="" placeholder="Enter Supplier name" value="{{$supplier->address}}">
                 </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Supplier Deals In</label>
+                  <input type="text" class="form-control" name="deals_in" id="" placeholder="Enter Supplier name" value="{{$supplier->deals_in}}">
+                </div>
 
               </div>
               <!-- /.box-body -->

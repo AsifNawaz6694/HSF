@@ -26,6 +26,8 @@
             {{$supplier->contact_number}}
               <br>
             {{$supplier->address}}
+              <br>
+            {{$supplier->deals_in}}
 
 
           <!-- /.box -->

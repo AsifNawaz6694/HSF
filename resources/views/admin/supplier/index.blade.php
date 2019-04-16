@@ -27,11 +27,12 @@
               <table id="userTable" class="table table-bordered table-hover">
                   <thead>
                     <tr>
-                        <th>Serial Number</th>
+                        <th>Serial No</th>
                         <th>Added By</th>
-                        <th>Supplier Name</th>
-                        <th>Supplier Contact No.</th>
-                        <th>Category Address</th>
+                        <th>Name</th>
+                        <th>Contact No.</th>
+                        <th>Address</th>
+                        <th>Deals In</th>
                         <th>Action</th>
                     </tr>
                   </thead>
@@ -43,6 +44,7 @@
                         <td>{{$supplier->name}}</td>
                         <td>{{$supplier->contact_number}}</td>
                         <td>{{$supplier->address}}</td>
+                        <td>{{$supplier->deals_in}}</td>
                         <td><a href="{{route('suppliers.edit', ['id' => $supplier->id])}}"><button type="button" class="btn btn-info">Edit</button></a>
                           <a href="{{route('suppliers.show', ['id' => $supplier->id])}}"><button type="button" class="btn btn-info">Show</button></a>
                           {{--<form id="deleteUser" action="{{route('suppliers.destroy', ['id' => $supplier->id])}}" method="post">--}}
@@ -57,11 +59,12 @@
 
                   <tfoot>
                     <tr>
-                        <th>Serial Number</th>
+                        <th>Serial No</th>
                         <th>Added By</th>
-                        <th>Supplier Name</th>
-                        <th>Supplier Contact No.</th>
-                        <th>Category Address</th>
+                        <th>Name</th>
+                        <th>Contact No.</th>
+                        <th>Address</th>
+                        <th>Deals In</th>
                         <th>Action</th>
                     </tr>
                   </tfoot>

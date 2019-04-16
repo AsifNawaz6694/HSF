@@ -27,32 +27,34 @@
               <table id="userTable" class="table table-bordered table-hover">
                   <thead>
                     <tr>
-                      <th>Serial Number</th>
+                     
+                    </tr> <th>Serial Number</th>
                       <th>Name</th>
-                      <th>Category</th>
                       <th>Brand</th>
+                      <th>Category</th>
+                      <th>Added By</th>
                       <th>Supplier</th>
                       <th>Action</th>
-                    </tr>
                   </thead>
                   <tbody>
                     @foreach($products as $key => $product)
                       <tr>
-                        <td>{{$key}}</td>
+                        <td>{{++$key}}</td>
                         <td>{{$product->name}}</td>
-                        <td>{{$product->name}}</td>
-                        <td>{{$product->name}}</td>
-                        <td>{{$product->name}}</td>
+                        <td>{{$product->brand->name}}</td>
+                        <td>{{$product->category->name}}</td>
+                        <td>{{$product->user->name}}</td>
+                        <td>{{$product->supplier->name}}</td>
                         <td><a href="{{route('products.edit', ['id' => $product->id])}}"><button type="button" class="btn btn-info">Edit</button></a>
 
 
                           <a href="{{route('products.show', ['id' => $product->id])}}"><button type="button" class="btn btn-info">Show</button></a>
                                                   
-                          <form id="deleteUser" action="{{route('products.destroy', ['id' => $product->id])}}" method="post">
+                          <!-- <form id="deleteUser" action="{{route('products.destroy', ['id' => $product->id])}}" method="post">
                             {{ method_field('DELETE') }}
                             <input type="hidden" name="_token" value="{{Session::token()}}">
                             <button type="submit" class="btn btn-danger f_role">Delete</button>
-                          </form>
+                          </form> -->
 
                         </td>
                       </tr>                
@@ -61,12 +63,13 @@
 
                   <tfoot>
                     <tr>
-                        <th>Serial Number</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Brand</th>
-                        <th>Supplier</th>
-                        <th>Action</th>
+                      <th>Serial Number</th>
+                      <th>Name</th>
+                      <th>Brand</th>
+                      <th>Category</th>
+                      <th>Added By</th>
+                      <th>Supplier</th>
+                      <th>Action</th>
                     </tr>
                   </tfoot>
 

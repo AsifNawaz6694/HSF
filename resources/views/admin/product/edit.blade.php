@@ -3,11 +3,11 @@
 
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- Content Header (Product header) -->
     <section class="content-header">
       <h1>
-        Page Panel
-        <small>- Edit Page</small>
+        Product Panel
+        <small>- Edit Product</small>
       </h1>
     </section>
 
@@ -18,30 +18,51 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Edit Page</h3>
+              <h3 class="box-title">Edit Product</h3>
                 @include('admin.partials.error_section')
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form action="{{route('pages.update', ['id' => $page->id])}}"  method="post">
+            <form action="{{route('products.update', ['id' => $product->id])}}"  method="post">
               {{ method_field('PUT') }}
               <div class="box-body">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Page Name</label>
-                  <input type="text" class="form-control" name="name" id="" placeholder="Enter Page name" value="{{$page->heading}}">
+                  <label for="exampleInputEmail1">Product Name</label>
+                  <input type="text" class="form-control" name="name" id="" placeholder="Enter Product name" value="{{$product->name}}">
                 </div>
-
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Content</label>
-                      <textarea name="content" id="editor1" rows="10" cols="60">{{$page->content}}</textarea>        
+                  <label for="exampleInputEmail1">Product Brand</label>
+                  <select name="brand_id" class="form-control">
+                    @foreach($brands as $brand)
+                      <option value="{{$brand->id}}" @if($brand->id==$product->brand_id) selected @endif>{{$brand->name}}</option>
+                    @endforeach
+                  </select>
                 </div>
-
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Product Category</label>
+                  <select name="category_id" class="form-control">
+                    @foreach($categories as $category)
+                      <option value="{{$category->id}}" @if($category->id==$product->category_id) selected @endif>{{$category->name}}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Added By</label>
+                  <input type="text" class="form-control" name="name" id="" placeholder="Enter Product name" value="{{$product->user->name}}" readonly="">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Supplier</label>
+                  <select name="category_id" class="form-control">
+                    @foreach($suppliers as $supllier)
+                      <option value="{{$supllier->id}}" @if($supllier->id==$product->supllier_id) selected @endif>{{$supllier->name}}</option>
+                    @endforeach
+                  </select>
+                </div>
               </div>
               <!-- /.box-body -->
-
               <div class="box-footer">
                 <input type="hidden" name="_token" value="{{Session::token()}}">
-                <button type="submit" class="btn btn-primary">Edit Page</button>
+                <button type="submit" class="btn btn-primary">Edit Product</button>
               </div>
             </form>
           </div>

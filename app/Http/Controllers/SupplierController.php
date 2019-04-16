@@ -49,6 +49,7 @@ class SupplierController extends Controller
             $supplier->name = $request->input('name');
             $supplier->contact_number = $request->input('contact_number');
             $supplier->address = $request->input('address');
+            $supplier->deals_in = $request->input('deals_in');
             if($supplier->save()){
                 $this->set_session('Supplier Successfully Added.', true);
             }else{
@@ -101,6 +102,7 @@ class SupplierController extends Controller
             $supplier->name = $request->input('name');
             $supplier->contact_number = $request->input('contact_number');
             $supplier->address = $request->input('address');
+            $supplier->deals_in = $request->input('deals_in');
             if($supplier->save()){
                 $this->set_session('Supplier Successfully Edited.', true);
             }else{

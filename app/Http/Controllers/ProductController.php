@@ -7,6 +7,7 @@ use App\Brand;
 use App\Supplier;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -23,7 +24,6 @@ class ProductController extends Controller
     public function index()
     {
         $data['products'] = $this->product->getAllProducts();
-
         return view('admin.product.index')->with($data);
     }
 
@@ -49,24 +49,25 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try{
-            //Creating new Category
+            //Creating new Product
             $product = $this->product;
             $product->added_by = Auth::user()->id;
+            $product->name = $request->input('name');
             $product->category_id = $request->input('category_id');
             $product->brand_id = $request->input('brand_id');
             $product->supplier_id = $request->input('supplier_id');
             if($product->save()){
 
-                $this->set_session('Category Successfully Added.', true);
+                $this->set_session('Product Successfully Added.', true);
             }else{
-                $this->set_session('Category couldnot be added.', false);
+                $this->set_session('Product couldnot be added.', false);
             }
 
-            return redirect()->route('categories.create');
+            return redirect()->route('products.create');
 
         }catch(\Exception $e){
-            $this->set_session('Category Couldnot be Added.'.$e->getMessage(), false);
-            return redirect()->route('categories.create');
+            $this->set_session('Product Couldnot be Added.'.$e->getMessage(), false);
+            return redirect()->route('products.create');
         }
     }
 
@@ -78,7 +79,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['product'] = $this->product->getSingleProduct($id);
+        return view('admin.product.show')->with($data);
     }
 
     /**
@@ -89,7 +91,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['product'] = $this->product->getSingleProduct($id);
+        $data['categories'] = Category::all();
+        $data['brands'] = Brand::all();
+        $data['suppliers'] = Supplier::all();
+        return view('admin.product.edit')->with($data);
     }
 
     /**

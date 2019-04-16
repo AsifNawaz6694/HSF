@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAddedByColumnToSuppliersTable extends Migration
+class AddDealsInToSuppliersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddAddedByColumnToSuppliersTable extends Migration
     public function up()
     {
         Schema::table('suppliers', function (Blueprint $table) {
-            $table->integer('added_by')->after('address');
+            $table->string('deals_in')->nullable()->after('added_by');
         });
     }
 
@@ -26,7 +26,7 @@ class AddAddedByColumnToSuppliersTable extends Migration
     public function down()
     {
         Schema::table('suppliers', function (Blueprint $table) {
-            $table->dropColumn('added_by');
+            $table->string('deals_in');
         });
     }
 }
